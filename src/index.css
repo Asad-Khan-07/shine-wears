@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Luxury Jewelry E-Commerce Design System */
+
+@layer base {
+  :root {
+    /* Primary - Rich Gold Brown */
+    --primary: 37 29% 32%;
+    --primary-foreground: 43 20% 95%;
+    
+    /* Secondary - Bright Gold */
+    --secondary: 43 55% 61%;
+    --secondary-foreground: 0 0% 10%;
+    
+    /* Background & Foreground */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+    
+    /* Card */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+    
+    /* Muted */
+    --muted: 40 20% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    /* Accent */
+    --accent: 43 55% 61%;
+    --accent-foreground: 0 0% 8%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Border & Input */
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 43 55% 61%;
+    
+    --radius: 0.25rem;
+    
+    /* Luxury specific */
+    --gold: 43 55% 61%;
+    --gold-dark: 37 29% 32%;
+    --cream: 40 30% 97%;
+    --charcoal: 0 0% 15%;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 40 20% 90%;
+    --sidebar-primary: 43 55% 61%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 43 55% 61%;
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 40 20% 95%;
+    
+    --card: 0 0% 8%;
+    --card-foreground: 40 20% 95%;
+    
+    --popover: 0 0% 8%;
+    --popover-foreground: 40 20% 95%;
+    
+    --primary: 43 55% 61%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 37 29% 32%;
+    --secondary-foreground: 40 20% 95%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 40 15% 65%;
+    
+    --accent: 43 55% 61%;
+    --accent-foreground: 0 0% 8%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 43 55% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply font-medium tracking-wide;
+  }
+}
+
+@layer components {
+  .luxury-heading {
+    font-family: 'Cormorant Garamond', serif;
+    @apply text-foreground tracking-widest uppercase;
+  }
+  
+  .luxury-subheading {
+    font-family: 'Montserrat', sans-serif;
+    @apply text-muted-foreground tracking-wider text-sm uppercase;
+  }
+  
+  .gold-gradient {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
+  }
+  
+  .gold-text {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .luxury-card {
+    @apply bg-card border border-border/50 shadow-sm hover:shadow-lg transition-all duration-500;
+  }
+  
+  .luxury-button {
+    @apply px-8 py-3 bg-primary text-primary-foreground tracking-widest uppercase text-sm font-medium;
+    @apply hover:bg-primary/90 transition-all duration-300;
+  }
+  
+  .luxury-button-outline {
+    @apply px-8 py-3 border-2 border-primary text-primary tracking-widest uppercase text-sm font-medium;
+    @apply hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+  
+  .luxury-input {
+    @apply w-full px-4 py-3 bg-background border border-border rounded-sm;
+    @apply focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary;
+    @apply transition-all duration-300;
+  }
+  
+  .admin-card {
+    @apply bg-card border border-border rounded-lg shadow-sm p-6;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .image-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+  
+  .image-shine:hover::after {
+    left: 100%;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
