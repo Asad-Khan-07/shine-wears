@@ -91,16 +91,6 @@ export default function AdminLogin() {
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-border">
-            <p className="text-center text-sm text-muted-foreground">
-              Demo credentials:
-            </p>
-            <p className="text-center text-sm mt-1">
-              <span className="text-foreground">admin@luxuryjewels.com</span>
-              <span className="text-muted-foreground"> / </span>
-              <span className="text-foreground">admin123</span>
-            </p>
-          </div>
         </div>
       </div>
     </div>

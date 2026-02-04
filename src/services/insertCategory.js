@@ -22,13 +22,13 @@ export const InsertCat = async (formData) => {
     ]);
 
   if (error) {
-    console.log(error.message);
+    alert(error.message);
     // alert("Error saving product");
   } else {
     alert("Category added successfully");
   }}
   catch(error){
-    console.log(error);
+    alert(error);
     
   }
 };

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
-import { useData } from '../context/DataContext';
+// import { useData } from '../context/DataContext';
 import { getCategories } from '../services/getCategories';
 import { CategoryContext } from '../context/Category';
 

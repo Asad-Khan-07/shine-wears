@@ -9,8 +9,8 @@ export const ProductDelete = async (id) => {
     .eq('category_id', id);     // filter by the product id
 
   if (error) {
-    console.error('Delete Error:', error.message);
-    alert('Failed to delete product!');
+    // console.error('Delete Error:', error.message);
+    alert('Failed to delete product!',error.message);
   } else {
     // setData(prev => prev.filter(p => p.id !== id)); // update UI
     alert('Product deleted successfully!');

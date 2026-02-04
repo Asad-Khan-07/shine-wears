@@ -26,6 +26,9 @@ import AdminCategories from "./pages/admin/AdminCategories";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminOrders from "./pages/admin/AdminOrders";
 import { CategoryProvider } from "./context/Category";
+import { OrderProvider } from "./context/OrderContext";
+import About from "./pages/About";
+import ScrollToTop from "./components/scroll/scroll";
 // import { CategoryContext, CategoryProvider } from "./context/Category";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,7 @@ const App = () => {
   const [pro, setPro] = useState([]); 
   return (
     <ProductProvider>
+    <OrderProvider>
                 <CategoryProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
@@ -43,7 +47,7 @@ const App = () => {
                 <Toaster />
                 <Sonner />
                 <BrowserRouter>
-
+<ScrollToTop/>
                   <Routes>
                     {/* Public Routes */}
                     <Route path="/" element={<Index />} />
@@ -53,6 +57,7 @@ const App = () => {
                     <Route path="/product/:slug" element={<ProductDetails />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/about" element={<About/>} />
 
                     {/* Admin Routes */}
                     <Route path="/admin/login" element={<AdminLogin />} />
@@ -64,6 +69,7 @@ const App = () => {
                     {/* Catch-all */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
+{/* </ScrollToTop> */}
                 </BrowserRouter>
               </CartProvider>
             </DataProvider>
@@ -71,6 +77,7 @@ const App = () => {
         </TooltipProvider>
       </QueryClientProvider>
                 </CategoryProvider>
+   </OrderProvider>
    </ProductProvider>
   );
 };

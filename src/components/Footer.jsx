@@ -27,10 +27,10 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-3">
-              {['Shop', 'Categories', 'About Us', 'Contact'].map((item) => (
+              {['Shop', 'Categories', 'About Us'].map((item) => (
                 <li key={item}>
                   <Link
-                    to={item === 'Shop' ? '/shop' : item === 'Categories' ? '/categories' : '#'}
+                    to={item === 'Shop' ? '/shop' : item === 'Categories' ? '/categories' : item === 'About Us' ? '/about':'#'}
                     className="text-background/70 hover:text-secondary transition-colors text-sm"
                   >
                     {item}

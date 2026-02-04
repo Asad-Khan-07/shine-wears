@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Plus, Edit, Trash2, X } from 'lucide-react';
 import AdminLayout from '../../components/AdminLayout';
-import { useData } from '../../context/DataContext';
+// import { useData } from '../../context/DataContext';
 import { InsertCat } from '../../services/insertCategory';
 import { getCategories } from '../../services/getCategories';
 import { CategoryDelete } from '../../services/deleteCategories';
 import { UpdateCategory } from '../../services/UpdateCategory';
 
 export default function AdminCategories() {
-  const { categories, products, addCategory, updateCategory, deleteCategory } = useData();
+  // const { categories, products, addCategory, updateCategory, deleteCategory } = useData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [data, setData] = useState([]);
@@ -26,7 +26,7 @@ export default function AdminCategories() {
       const { data:products, error } = await getCategories();
       if (error) console.error(error);
       else {setData(products);
-      console.log(data);
+      // console.log(data);
       }
     };
     fetchProducts();
@@ -66,16 +66,16 @@ export default function AdminCategories() {
   //   closeModal();
   // };
 
-  const handleDelete = (id) => {
-    const productCount = products.filter(p => p.categoryId === id).length;
-    const message = productCount > 0
-      ? `This will also delete ${productCount} product(s) in this category. Are you sure?`
-      : 'Are you sure you want to delete this category?';
+  // const handleDelete = (id) => {
+  //   const productCount = products.filter(p => p.categoryId === id).length;
+  //   const message = productCount > 0
+  //     ? `This will also delete ${productCount} product(s) in this category. Are you sure?`
+  //     : 'Are you sure you want to delete this category?';
     
-    if (window.confirm(message)) {
-      deleteCategory(id);
-    }
-  };
+  //   if (window.confirm(message)) {
+  //     deleteCategory(id);
+  //   }
+  // };
 
   return (
     <AdminLayout>

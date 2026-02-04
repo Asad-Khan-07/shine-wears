@@ -15,7 +15,7 @@ export const UpdateCategory = async ( formData) => {
     .single();
 
   if (error) {
-    console.error('Update Error:', error);
+    alert('Update Error:', error.message);
     // return { error };
   }else{
     alert("Category update succesfully")

@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Plus, Edit, Trash2, X, Search } from 'lucide-react';
 import AdminLayout from '../../components/AdminLayout';
-import { useData } from '../../context/DataContext';
+// import { useData } from '../../context/DataContext';
 import { InsertData } from '../../services/insert';
 import { getProducts } from '../../services/getProduct';
 // import { supabase } from '../../services/supabase';
 import { ProductDelete } from '../../services/deleteProduct';
 import { UpdateProduct } from '../../services/Updateproduct';
+import { CategoryContext } from '../../context/Category';
 
 export default function AdminProducts() {
-  const { categories, addProduct, updateProduct, deleteProduct } = useData();
+  // const { categories, addProduct, updateProduct, deleteProduct } = useData();
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
+   const { category } = useContext(CategoryContext );
+  
 
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    categoryId: '',
-    categoryName: '',
-    image: '',
-    featured: false,
-    inStock: true,
-    details: ''
-  });
+const [formData, setFormData] = useState({
+  name: '',
+  description: '',
+  price: '',
+  categoryId: '',
+  categoryName: '',
+  image: '',
+  featured: false,
+  inStock: true,
+  details: ''
+});
 
   // Fetch products from API
   useEffect(() => {
@@ -59,7 +62,7 @@ export default function AdminProducts() {
         inStock: product.in_stock,
         details: product.details // convert array to string
       });
-      console.log(product.category_id);
+      // console.log(product.category_id);
       
     } else {
       setEditingProduct(null);
@@ -67,8 +70,8 @@ export default function AdminProducts() {
         name: '',
         description: '',
         price: '',
-        categoryId: categories[0]?.id || '',
-        categoryName: categories[0]?.name || '',
+        categoryId: category[0]?.id || '',
+        categoryName: category[0]?.name || '',
         image: '',
         featured: false,
         inStock: true,
@@ -147,8 +150,8 @@ export default function AdminProducts() {
             className="luxury-input w-full md:w-48"
           >
             <option value="all">All Categories</option>
-            {categories.map(cat => (
-              <option key={cat.id} value={cat.name}>{cat.name}</option>
+            {category.map(cat => (
+              <option key={cat.id} value={cat.category_name}>{cat.category_name}</option>
             ))}
           </select>
         </div>
@@ -256,8 +259,8 @@ export default function AdminProducts() {
                       required
                     >
                       <option value="">Select category</option>
-                      {categories.map(cat => (
-                        <option key={cat.id} value={JSON.stringify({id: cat.id, name: cat.name})}>{cat.name}</option>
+                      {category.map(cat => (
+                        <option key={cat.id} value={JSON.stringify({id: cat.id, name: cat.category_name})}>{cat.category_name}</option>
                       ))}
                     </select>
                   </div>

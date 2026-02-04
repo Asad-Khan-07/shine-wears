@@ -20,7 +20,7 @@ export const InsertData = async (formData) => {
     ]);
 
   if (error) {
-    console.log(error.message);
+    alert(error.message);
     // alert("Error saving product");
   } else {
     alert("Product added successfully");

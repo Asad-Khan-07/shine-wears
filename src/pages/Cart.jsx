@@ -12,7 +12,7 @@ export default function Cart() {
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'PKR',
       minimumFractionDigits: 0
     }).format(price);
   };

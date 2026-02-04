@@ -4,12 +4,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import { ProductContext } from '../context/ProductContext';
+import { CategoryContext } from '../context/Category';
 import { useData } from '../context/DataContext';
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { categories } = useData();          // local categories
   const { pro } = useContext(ProductContext); // supabase products
+ const { category } = useContext(CategoryContext );
 
   const [sortBy, setSortBy] = useState('featured');
 

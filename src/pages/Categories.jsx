@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CategoryCard from '../components/CategoryCard';
-import { useData } from '../context/DataContext';
-import { getCategories } from '../services/getCategories';
+// import { useData } from '../context/DataContext';
+// import { getCategories } from '../services/getCategories';
 import { CategoryContext } from '../context/Category';
 
 export default function Categories() {

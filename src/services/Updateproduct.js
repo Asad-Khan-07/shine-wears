@@ -20,8 +20,8 @@ export const UpdateProduct = async (formData) => {
     .single();
 
   if (error) {
-    console.error('Update Error:', error.message);
-    console.log(formData.categoryId);
+   alert('Update Error:', error.message);
+    // console.log(formData.categoryId);
     // return { error };
     
   }else{

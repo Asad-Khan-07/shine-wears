@@ -16,32 +16,18 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   
-  const [product, setProduct] = useState([]);
+  // const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
 const {pro}=useContext(ProductContext)
 
-  // Fetch the product by slug
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const res = await getProducts();
-      const allProducts = res?.data || [];
-      // Match product based on slug
-      // console.log(slug);
-      // console.log(found);
-      // console.log(product);
-      
-    };
-    
-    fetchProduct();
-    const found = pro.find((p) => p.name ===slug);
-    setProduct(found );
-  }, [pro]);
+
+const product = pro?.find((p) => p.name === slug);
 
   const formatPrice = (price) =>
     new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'PKR',
       minimumFractionDigits: 0,
     }).format(price);
 

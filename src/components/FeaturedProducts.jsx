@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ProductCard from './ProductCard';
-import { useData } from '../context/DataContext';
+// import { useData } from '../context/DataContext';
 import { getProducts } from '../services/getProduct';
 import { ProductContext } from '../context/ProductContext';
 
 export default function FeaturedProducts() {
-  const { getFeaturedProducts } = useData();
-  const featuredProducts = getFeaturedProducts().slice(0, 4);
+  // const { getFeaturedProducts } = useData();
+  // const featuredProducts = getFeaturedProducts().slice(0, 4);
   const {pro,setPro}=useContext(ProductContext)
 
 // const [data,setData]=useState([])

@@ -1,46 +1,82 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Package, Tags, ShoppingCart, DollarSign, TrendingUp, Users } from 'lucide-react';
 import AdminLayout from '../../components/AdminLayout';
-import { useData } from '../../context/DataContext';
+import { OrderContext } from '../../context/OrderContext';
+import { CategoryContext } from '../../context/Category';
+import { ProductContext } from '../../context/ProductContext';
+// import { useData } from '../../context/DataContext';
 
 export default function AdminDashboard() {
-  const { products, categories, orders } = useData();
+  // const { products, categories, orders } = useData();
+  const { order } = useContext(OrderContext);
+    const { pro } = useContext(ProductContext); // supabase products
+ const { category } = useContext(CategoryContext );
+const total = (order || []).reduce((sum, o) => {
+  return o.status === "shipped"
+    ? sum + o.Total
+    : sum;
+}, 0);
 
-  const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
-  const pendingOrders = orders.filter(o => o.status === 'Pending').length;
+  // const pendingOrders = orders.filter(o => o.status === 'Pending').length;
+            const count = (order || []).filter(o => o.status === 'pending').length;
 
+// console.log(totalRevenue);
+
+     
+            
   const stats = [
     {
-      name: 'Total Revenue',
-      value: `$${totalRevenue.toLocaleString()}`,
+      name: 'Total sales',
+      value: `Rs: ${total}`,
       icon: DollarSign,
       change: '+12%',
       changeType: 'positive'
     },
     {
       name: 'Products',
-      value: products.length,
+      value: pro.length,
       icon: Package,
       change: '+3',
       changeType: 'positive'
     },
     {
       name: 'Categories',
-      value: categories.length,
+      value: category.length,
       icon: Tags,
       change: '0',
       changeType: 'neutral'
     },
     {
       name: 'Pending Orders',
-      value: pendingOrders,
+      value: count,
       icon: ShoppingCart,
       change: '-2',
       changeType: 'negative'
     }
   ];
 
-  const recentOrders = orders.slice(0, 5);
+  // const recentOrders = orders.slice(0, 5);
+
+
+  const orders = (order || []).map((o) => ({
+    id: o.id,
+  customerName: `${o.first_Name} ${o.last_Name}`,
+  customerEmail: o.email,
+  phone:o.Phone,
+  date: new Date(o.created_at).toLocaleDateString("en-GB"),
+  items: (o.items || []).map((i) => ({
+    name: i.Item,
+    quantity: i.Quantity,
+    price: i.Quantity ? i.Total / i.Quantity : 0
+  })),
+  total: o.Total,
+  quantity: o.Quantity,
+  status: o.status,
+  address:o.Address,
+  city:o.City,
+  state:o.State,
+  zipcode:o.zip_Code
+}));
 
   return (
     <AdminLayout>
@@ -54,7 +90,7 @@ export default function AdminDashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat) => (
-            <div key={stat.name} className="admin-card">
+            <div key={stat.name} className="admin-card"> 
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{stat.name}</p>
@@ -65,20 +101,20 @@ export default function AdminDashboard() {
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm">
-                <TrendingUp className={`w-4 h-4 mr-1 ${
+                {/* <TrendingUp className={`w-4 h-4 mr-1 ${
                   stat.changeType === 'positive' ? 'text-green-500' :
                   stat.changeType === 'negative' ? 'text-red-500' : 'text-muted-foreground'
-                }`} />
-                <span className={
+                }`} /> */}
+                {/* <span className={
                   stat.changeType === 'positive' ? 'text-green-500' :
                   stat.changeType === 'negative' ? 'text-red-500' : 'text-muted-foreground'
                 }>
                   {stat.change}
-                </span>
-                <span className="text-muted-foreground ml-1">from last month</span>
+                </span> */}
+                {/* <span className="text-muted-foreground ml-1">from last month</span> */}
               </div>
             </div>
-          ))}
+          ))} 
         </div>
 
         {/* Recent Orders */}
@@ -96,7 +132,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.map((order) => (
+                {orders.map((order) => (
                   <tr key={order.id} className="border-b border-border last:border-0">
                     <td className="py-4 font-medium">#{order.id}</td>
                     <td className="py-4">{order.customerName}</td>
@@ -124,14 +160,14 @@ export default function AdminDashboard() {
           <div className="admin-card">
             <h2 className="text-xl luxury-heading mb-6">Top Categories</h2>
             <div className="space-y-4">
-              {categories.map((category) => {
-                const productCount = products.filter(p => p.categoryId === category.id).length;
-                const percentage = (productCount / products.length) * 100 || 0;
+              {category.map((cat) => {
+                const productCount = pro.filter(p => p.category_name.toLowerCase() === cat.category_name.toLowerCase()).length;
+                const percentage = (productCount / pro.length) * 100 || 0;
                 return (
-                  <div key={category.id}>
+                  <div key={cat.id}>
                     <div className="flex justify-between text-sm mb-1">
-                      <span>{category.name}</span>
-                      <span className="text-muted-foreground">{productCount} products</span>
+                      <span>{cat.category_name}</span>
+                      <span className="text-muted-foreground mx-5">products {productCount}</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div
