@@ -96,7 +96,7 @@ export default function Cart() {
                         </button>
                       </div>
 
-                      <div className="mt-4 flex items-center justify-between">
+                      <div className="mt-4 flex items-center flex-col justify-between">
                         {/* Quantity */}
                         <div className="flex items-center border border-border">
                           <button
